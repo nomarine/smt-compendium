@@ -1,0 +1,30 @@
+.logo-default {
+    font-family: "Revalia";
+    font-size: 24px;
+    color: white;
+    text-decoration: none;
+}
+
+.bg-default {
+    background-color: #334279;
+}
+    
+.card {
+    color:white;
+}
+
+.searchbar {
+    max-width: 100%;
+    margin: 40px;
+    padding: 20px;
+    background-color:#334279;
+    color: white;
+    display: flex;
+    justify-content: space-between; /* Distribute items evenly with a gap between them */
+    align-items: stretch; /* Stretch items to fill the container's height */
+}
+
+.searchbar .form-field {
+    flex: 1; /* Make items grow to fill available space equally */
+    margin-right: 20px; /* Add a gap of 20px between items */
+}
