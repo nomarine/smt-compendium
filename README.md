@@ -1,1 +1,1 @@
-<h1 style="font-family: Revalia">SMT Compendium</h1>
+<h1 style="font-family: 'Revalia', sans-serif;">SMT Compendium</h1>
