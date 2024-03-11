@@ -33,6 +33,7 @@ Após achar o demon/persona que desperte seu interesse, clique no ícone de "olh
 - `PHP (8.3.1)`
 - `Laravel (10.46.0)`
 - `Vue.js (3.2.37)`
+- `Bootstrap (5.2.3)`
 
 # Executando localmente
 ## Requisitos 

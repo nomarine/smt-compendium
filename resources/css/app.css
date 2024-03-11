@@ -1,3 +1,4 @@
+/*Body*/
 .logo-default {
     font-family: "Revalia";
     font-size: 24px;
@@ -13,18 +14,43 @@
     color:white;
 }
 
+/*Form*/
 .searchbar {
     max-width: 100%;
     margin: 40px;
     padding: 20px;
     background-color:#334279;
     color: white;
+    border-radius: 12px;
+}
+
+.searchbar-title {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    align-self: stretch;
+}
+
+.search-fields {
     display: flex;
     justify-content: space-between; /* Distribute items evenly with a gap between them */
     align-items: stretch; /* Stretch items to fill the container's height */
 }
 
-.searchbar .form-field {
+.search-fields .form-field:not(:last-child) {
     flex: 1; /* Make items grow to fill available space equally */
     margin-right: 20px; /* Add a gap of 20px between items */
+}
+
+.form-actions {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.form-actions button:not(:last-child){
+    margin-right: 20px;
+}
+
+button i {
+    margin-right: 8px;
 }
