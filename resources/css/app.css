@@ -16,8 +16,7 @@
 
 /*Form*/
 .searchbar {
-    max-width: 100%;
-    margin: 40px;
+    margin-bottom: 40px;
     padding: 20px;
     background-color:#334279;
     color: white;
@@ -54,3 +53,30 @@
 button i {
     margin-right: 8px;
 }
+
+/*Table*/
+
+thead {
+    --bs-table-bg: #334279;
+}
+
+.table th, .table td {
+    padding: 16px;
+}
+
+/* Style for elements with tooltips */
+a[data-bs-toggle="tooltip"] span {
+    border-bottom: 1px dashed; /* Adjust the width and style of the border as needed */
+    text-decoration: none;
+    color: var(--bs-white);
+}
+
+a[data-bs-toggle="tooltip"] {
+    text-decoration: none;
+    color: var(--bs-white);
+}
+
+.custom-tooltip {
+    --bs-tooltip-bg: #334279;
+    --bs-tooltip-color: var(--bs-white);
+  }
