@@ -14,6 +14,18 @@
     color:white;
 }
 
+p, label {
+    color: var(--bs-white);
+}
+
+label {
+    font-weight: bold;
+}
+
+hr {
+    color:  var(--bs-white);
+}
+
 /*Form*/
 .searchbar {
     margin-bottom: 40px;
@@ -24,6 +36,7 @@
 }
 
 .searchbar-title {
+    font-size: 24px;
     display: flex;
     align-items: flex-end;
     gap: 20px;
@@ -79,4 +92,10 @@ a[data-bs-toggle="tooltip"] {
 .custom-tooltip {
     --bs-tooltip-bg: #334279;
     --bs-tooltip-color: var(--bs-white);
-  }
+}
+
+/* Demon show */
+.demon-title {
+    font-family: "Revalia";
+    color: var(--bs-white);
+}

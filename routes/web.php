@@ -21,6 +21,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/demon_search', function () {
-    return view('app/demons/index');
-});
+Route::get('demon/index', function () {
+    return view('app/demon/index');
+})->name('demon/index');;
+
+Route::get('demon/show', function () {
+    return view('app/demon/show');
+})->name('demon/show');
