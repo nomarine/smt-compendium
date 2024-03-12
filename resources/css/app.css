@@ -26,6 +26,10 @@ hr {
     color:  var(--bs-white);
 }
 
+h1, h2, h3, h4, h5 {
+    color: var(--bs-white);
+}
+
 /*Form*/
 .searchbar {
     margin-bottom: 40px;
@@ -63,7 +67,7 @@ hr {
     margin-right: 20px;
 }
 
-button i {
+button i, a i {
     margin-right: 8px;
 }
 
@@ -75,6 +79,10 @@ thead {
 
 .table th, .table td {
     padding: 16px;
+}
+
+.table i {
+    margin-left: 4px;
 }
 
 /* Style for elements with tooltips */
@@ -98,4 +106,45 @@ a[data-bs-toggle="tooltip"] {
 .demon-title {
     font-family: "Revalia";
     color: var(--bs-white);
+}
+
+.demon-portrait {
+    border: 5px solid;
+    
+    border-color: #C5C5C5;
+    width: 100%;
+    height: auto;
+}
+
+/* Tabs */
+.nav-tabs .nav-item {
+    background: #C5C5C5;
+    border-radius: 12px 12px 0px 0px;
+}
+
+.nav-tabs {
+    border-bottom: none; /* Remove border between tabs and tab content */
+}
+
+.nav-tabs .nav-link {
+    position: relative;
+    border: none;
+}
+
+.nav-tabs .nav-link::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    width: 0; /* Initially set width to 0 so the underline is not visible */
+    height: 4px; /* Height of the underline */
+    background-color: #334279; /* Color of the underline */
+    transition: width 0.3s ease; /* Smooth transition effect */
+    border: none;
+}
+
+.nav-tabs .nav-link.active::after {
+    width: 100%; /* Make the underline cover the entire width of the active tab */
+    border: none;
 }

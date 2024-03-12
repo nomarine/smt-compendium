@@ -2,9 +2,9 @@
     <table class="table">
         <thead>
             <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Race</th>
-            <th scope="col">Arcana</th>
+            <th scope="col">Name<i class="fa-solid fa-sort"></i></th>
+            <th scope="col">Race<i class="fa-solid fa-sort"></i></th>
+            <th scope="col">Arcana<i class="fa-solid fa-sort"></i></th>
             <th scope="col">Origin</th>
             <th scope="col">Appearances</th>
             <th scope="col">Actions</th>
@@ -17,7 +17,7 @@
             <td>Emperor</td>
             <td>Hindu, Buddhist</td>
             <td><a data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="left" data-bs-title="Megami Ibunroku Persona"><span>P1</span></a></td>
-            <td><a href="#" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="left" data-bs-title="Learn more"><i class="fa-solid fa-eye"></i></a></td>
+            <td><a href="show" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="left" data-bs-title="Learn more"><i class="fa-solid fa-eye"></i></a></td>
             </tr>
         </tbody>
     </table>
