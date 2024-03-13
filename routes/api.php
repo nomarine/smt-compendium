@@ -30,3 +30,12 @@ Route::group([
     Route::post('me', 'App\Http\Controllers\AuthController@me');
 
 });
+
+Route::group([
+
+    'middleware' => 'jwt.auth',
+    'prefix' => 'v1'
+
+], function ($router) {
+    Route::apiResource('demon', 'App\Http\Controllers\DemonController');
+});

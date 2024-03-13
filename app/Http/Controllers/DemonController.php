@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 class DemonController extends Controller
 {
+    public function __construct(Demon $demon) {
+        $this->demon = $demon;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -28,7 +31,13 @@ class DemonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate($this->demon->rules(), $this->demon->feedback());
+        $demon = $this->demon->create([
+            'name' => $request->name,
+            'lore' => $request->lore,
+        ]);
+
+        return $response()->json($demon, 201);
     }
 
     /**
