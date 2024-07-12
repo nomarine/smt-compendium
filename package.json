@@ -5,7 +5,9 @@
         "dev": "vite",
         "build": "vite build",
         "watch": "vite build --watch",
-        "start": "start php artisan serve && start npm run watch"
+        "start": "start php artisan serve --port=8001 && start npm run watch",
+        "kill": "taskkill /IM php.exe /F && taskkill /IM node.exe /F",
+        "clear-all": "php artisan config:clear && php artisan route:clear && php artisan cache:clear && npm run start"
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.6",

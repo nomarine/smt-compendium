@@ -54,17 +54,58 @@
             <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
         </div>
     </form>
-    <DemonTable/>
+    <!-- <DemonTable/> -->
+     <TableComponent
+        :tableColumns="tableColumns"
+        :personaData="personaData"
+        :actions="actions">
+     </TableComponent>
 </template>
 
 <script>
     import DemonTable from './DemonTable.vue';
+    import TableComponent from './TableComponent.vue';
     export default {
         mounted() {
             console.log('Component mounted.')
         },
         components: {
-            DemonTable
+            DemonTable,
+            TableComponent
+        },
+        data() {
+            return {
+                tableColumns: {
+                    name: {title: 'Name', type: 'text'},
+                    race: {title: 'Race', type: 'text'},
+                    arcana: {title: 'Arcana', type: 'text'},
+                    origin: {title: 'Origin', type: 'list'},
+                    appearances: {title: 'Appearances', type: 'dict'},
+                    actions: {title: 'Actions', type: 'text'},
+                },
+                personaData: {
+                    seimen_kongou: 
+                        { 
+                            name: 'Seimen Kongou', 
+                            race: 'N/A', 
+                            arcana: 'Emperor', 
+                            origin: ['Hinduism', 'Budhism'], 
+                            appearances: {
+                                p1: {
+                                    abbreviation: 'P1',
+                                    description: 'Megami Ibunroku Persona'
+                                },
+                                pasa: {
+                                    abbreviation: 'P-ASA',
+                                    description: 'Persona All Stars'
+                                },
+                            }
+                    }
+                },
+                actions: {
+                    show: {title: '', description: 'Learn more', icon: 'fa-solid fa-eye'}
+                }
+            }
         }
     }
 </script>
