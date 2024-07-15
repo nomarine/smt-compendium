@@ -1,5 +1,5 @@
 <template>
-    <form class="searchbar row">
+    <form class="searchbar row gap-3">
         <div class="searchbar-title">
             <h4>Demon Search</h4>
         </div>
@@ -60,6 +60,11 @@
         :personaData="personaData"
         :actions="actions">
      </TableComponent>
+     <pagination-component>
+        <li v-for="page, key in pagination" :key="key" :class="page.active ? 'page-item active' : 'page-item'">
+            <a class="page-link" href="#" v-html="page.label"></a>
+        </li>
+     </pagination-component>
 </template>
 
 <script>
@@ -104,6 +109,20 @@
                 },
                 actions: {
                     show: {title: '', description: 'Learn more', icon: 'fa-solid fa-eye'}
+                },
+                pagination: {
+                    1: {
+                        label: '1',
+                        active: true
+                    },
+                    2: {
+                        label: '2',
+                        active: false
+                    },
+                    3: {
+                        label: '3',
+                        active: false
+                    },
                 }
             }
         }

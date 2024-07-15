@@ -5,6 +5,7 @@
  */
 
 import '../css/app.css';
+import '../sass/app.scss';
 import './bootstrap';
 import { createApp } from 'vue';
 
