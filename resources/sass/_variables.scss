@@ -8,7 +8,6 @@ $line-height-base: 1.6;
 
 //Form fields
 $form-select-bg: white;
-
 $input-bg: white;
 
 //Navbar
@@ -22,9 +21,14 @@ $nav-link-color: #334279;
 $nav-tabs-link-active-bg:  #C5C5C5;
 
 // Pagination
+$pagination-button: #7AA5E9;
+
 .select-pagination {
-    color: white;
+    color: $pagination-button;
     background-color: $body-bg;
     border-style:none;
 }
 
+.pagination-controller i{
+    color: $pagination-button;
+}

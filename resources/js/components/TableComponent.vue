@@ -13,7 +13,7 @@
         </thead>
         <tbody>
             <tr v-for="persona, personaKey in personaData" :key="personaKey">
-                <td v-for="column, columnKey in tableColumns" :key="columnKey" scope="row">
+                <td v-for="column, columnKey in tableColumns" :key="columnKey" scope="row" class="align-middle">
                     <span v-if="column.type === 'list'">
                         <template v-for="value, key in persona[columnKey]" :key="key">
                             <span>{{value}}</span>
