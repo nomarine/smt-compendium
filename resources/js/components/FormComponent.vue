@@ -1,7 +1,7 @@
 <template>
     <form class="searchbar row gap-3">
         <div class="searchbar-title">
-            <h4>Demon Search</h4>
+            <h4>{{formTitle}}</h4>
         </div>
         <slot name="fields"></slot>
 
@@ -21,7 +21,8 @@
         },
         props: [
             'formSelectList',
-            'formActions'
+            'formActions',
+            'formTitle'
         ],
     }
 </script>

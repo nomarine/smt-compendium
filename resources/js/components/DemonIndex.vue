@@ -1,54 +1,25 @@
 <template>
     <FormComponent
         :formSelectList="formSelectList"
-        :formActions="formActions">
+        :formActions="formActions"
+        formTitle="Demon Search">
         <template v-slot:fields>
             <div class="search-fields">
-            <div class="form-field">
-                <label for="demon_name" class="form-label">Name</label>
-                <input name="demon_name" type="text" class="form-control">
+                <div class="form-field">
+                    <label for="demon_name" class="form-label">Name</label>
+                    <input name="demon_name" type="text" class="form-control">
+                </div>
+                
+                <template v-for="field, fieldKey in formSelectList" :key="fieldKey">
+                    <div class="form-field">
+                        <label :for="'demon_'+fieldKey" class="form-label">{{fieldKey}}</label>
+                        <select :name="'demon_'+fieldKey" class="form-select" aria-label="Race select field">
+                            <option selected></option>
+                            <option v-for="option, optionKey in field" :value="option.id" :key="optionKey">{{option.title}}</option>
+                        </select>
+                    </div>
+                </template>
             </div>
-
-            <div class="form-field">
-                <label for="demon_race" class="form-label">Race</label>
-                <select name="demon_race" class="form-select" aria-label="Default select example">
-                    <option selected></option>
-                    <option v-for="r, raceKey in formSelectList.race" :value="r.id" :key="raceKey">{{r.title}}</option>
-                    <!-- <option value="2">Two</option>
-                    <option value="3">Three</option> -->
-                </select>
-            </div>
-
-            <div class="form-field">
-                <label for="demon_arcana" class="form-label">Arcana</label>
-                <select name="demon_arcana" class="form-select" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
-            </div>
-
-            <div class="form-field">
-                <label for="demon_origin" class="form-label">Origin</label>
-                <select name="demon_origin" class="form-select" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
-            </div>
-
-            <div class="form-field">
-                <label for="demon_appearance" class="form-label">Appears in</label>
-                <select name="demon_appearance" class="form-select" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
-            </div>
-        </div>
         </template>
     </FormComponent>
 
