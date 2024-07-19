@@ -15,6 +15,7 @@ $dropdown-bg: white;
 
 //Table
 $table-color: white;
+$row-height-persona-table: 20px;
 
 //Tabs
 $nav-link-color: #334279;
@@ -31,4 +32,8 @@ $pagination-button: #7AA5E9;
 
 .pagination-controller i{
     color: $pagination-button;
+}
+
+.row-persona-table{
+    height: $row-height-persona-table;
 }

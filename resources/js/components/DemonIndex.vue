@@ -57,7 +57,7 @@
     <!-- <DemonTable/> -->
      <TableComponent
         :tableColumns="tableColumns"
-        :personaData="personaData"
+        :payload="personaData"
         :actions="actions">
      </TableComponent>
      <pagination-component>
@@ -102,7 +102,7 @@
                                 },
                                 pasa: {
                                     abbreviation: 'P-ASA',
-                                    description: 'Persona All Stars'
+                                    description: 'Persona All-Stars Arena'
                                 },
                             }
                     }

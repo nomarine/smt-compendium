@@ -3,44 +3,38 @@
         <thead>
             <tr>
             <th scope="col" v-for="column, key in tableColumns" :key="key">{{column.title}}<i class="fa-solid fa-sort"></i></th>
-            <!-- <th scope="col">Name<i class="fa-solid fa-sort"></i></th>
-            <th scope="col">Race<i class="fa-solid fa-sort"></i></th>
-            <th scope="col">Arcana<i class="fa-solid fa-sort"></i></th>
-            <th scope="col">Origin</th>
-            <th scope="col">Appearances</th>
-            <th scope="col">Actions</th> -->
             </tr>
         </thead>
         <tbody>
-            <tr v-for="persona, personaKey in personaData" :key="personaKey">
+            <tr v-for="data, dKey in payload" :key="dKey" class="row-persona-table">
                 <td v-for="column, columnKey in tableColumns" :key="columnKey" scope="row" class="align-middle">
                     <span v-if="column.type === 'list'">
-                        <template v-for="value, key in persona[columnKey]" :key="key">
-                            <span>{{value}}</span>
-                        <span v-if="key != persona[columnKey].length - 1">, </span>
+                        <template v-for="item, key in data[columnKey]" :key="key">
+                            <span>{{item}}</span>
+                        <span v-if="key != data[columnKey].length - 1">, </span>
                         </template>
                     </span>
                     <span v-else-if="column.type === 'dict'">
-                        <template v-for="game, gameKey, index in persona.appearances" :key="gameKey">
-                        <a data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="left" :data-bs-title="game.description">
-                            <span>{{game.abbreviation}}</span>
+                        <template v-for="item, iKey, index in data[columnKey]" :key="iKey">
+                        <a data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="left" :data-bs-title="item.description">
+                            <span>{{item.abbreviation}}</span>
                         </a>
-                        <span v-if="index != Object.keys(persona.appearances).length - 1">, </span>
+                        <span v-if="index != Object.keys(data[columnKey]).length - 1">, </span>
                         </template>
                     </span>
                     <span v-else-if="columnKey === 'actions'">
-                        <td><a href="show" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="left" data-bs-title="Learn more"><i class="fa-solid fa-eye"></i></a></td>
+                        <td>
+                            <template v-for="action, aKey in actions" :key="aKey">
+                                <a :href="aKey" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="left" :data-bs-title="action.description">
+                                    <i :class="action.icon"></i>
+                                </a>
+                            </template>
+                        </td>
                     </span>
                     <span v-else>
-                        {{persona[columnKey]}}
+                        {{data[columnKey]}}
                     </span>
                 </td>
-            <!-- <td>{{persona.name}}</td>
-            <td>{{persona.race}}</td>
-            <td>{{persona.arcana}}</td>
-            <td>{{persona.origin}}</td>
-            <td><a data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="left" data-bs-title={{persona.appearances}}><span>P1</span></a></td> -->
-                
             </tr>
         </tbody>
     </table>
@@ -58,8 +52,8 @@
         },
         props: [
             'tableColumns',
-            'personaData',
+            'payload',
             'actions'
         ],
     }
-</script>./TableComponent.vue
+</script>
