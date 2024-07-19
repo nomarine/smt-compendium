@@ -1,9 +1,9 @@
 <template>
-    <form class="searchbar row gap-3">
-        <div class="searchbar-title">
-            <h4>Demon Search</h4>
-        </div>
-        <div class="search-fields">
+    <FormComponent
+        :formSelectList="formSelectList"
+        :formActions="formActions">
+        <template v-slot:fields>
+            <div class="search-fields">
             <div class="form-field">
                 <label for="demon_name" class="form-label">Name</label>
                 <input name="demon_name" type="text" class="form-control">
@@ -12,10 +12,10 @@
             <div class="form-field">
                 <label for="demon_race" class="form-label">Race</label>
                 <select name="demon_race" class="form-select" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option selected></option>
+                    <option v-for="r, raceKey in formSelectList.race" :value="r.id" :key="raceKey">{{r.title}}</option>
+                    <!-- <option value="2">Two</option>
+                    <option value="3">Three</option> -->
                 </select>
             </div>
 
@@ -49,37 +49,60 @@
                 </select>
             </div>
         </div>
-        <div class="col-md-12 form-actions">
-            <button type="button" class="btn btn-secondary"><i class="fa-solid fa-eraser"></i>Clear</button>
-            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
-        </div>
-    </form>
-    <!-- <DemonTable/> -->
-     <TableComponent
+        </template>
+    </FormComponent>
+
+    <TableComponent
         :tableColumns="tableColumns"
         :payload="personaData"
         :actions="actions">
-     </TableComponent>
-     <pagination-component>
-        <li v-for="page, key in pagination" :key="key" :class="page.active ? 'page-item active' : 'page-item'">
-            <a class="page-link" href="#" v-html="page.label"></a>
-        </li>
-     </pagination-component>
+    </TableComponent>
+    
+    <Pagination-component>
+    <li v-for="page, key in pagination" :key="key" :class="page.active ? 'page-item active' : 'page-item'">
+        <a class="page-link" href="#" v-html="page.label"></a>
+    </li>
+    </Pagination-component>
 </template>
 
 <script>
-    import DemonTable from './DemonTable.vue';
-    import TableComponent from './TableComponent.vue';
     export default {
         mounted() {
             console.log('Component mounted.')
         },
-        components: {
-            DemonTable,
-            TableComponent
-        },
         data() {
             return {
+                formSelectList: {
+                    race: {
+                        night: {id:'10', title:'Night'},
+                        fairy: {id:'08', title:'Fairy'},
+                        fiend: {id:'66', title:'Fiend'},
+                        vile: {id:'24', title:'Vile'},
+                    },
+                    arcana: {
+                        fool: {id:'00', title:'Fool'},
+                        jester: {id:'00-1', title:'Jester'},
+                        hope: {id:'00-7', title:'Hope'},
+                    },
+                    origin: {
+                        budhism: {id:'03', title:'Budhism'},
+                        hinduism: {id:'02', title:'Hinduism'},
+                        japanese: {id:'01', title:'Japanese'},
+                    },
+                    appears_in: {
+                        p1: {id:'p1', title:'Megami Ibunroku Persona'},
+                        smt3: {id:'smt3', title:'Shin Megami Tensei 3: Nocturne'},
+                        desu1: {id:'desu1', title:'Devil Survivor'},
+                    }
+                },
+                formActions: {
+                    submit: {title:'Search', icon: 'fa-solid fa-magnifying-glass'},
+                    etc: {
+                        clear: {title:'Clear', icon: 'fa-solid fa-eraser'},
+                        // random: {title:'Random', icon: 'fa-solid fa-dice'},
+                    },
+
+                },
                 tableColumns: {
                     name: {title: 'Name', type: 'text'},
                     race: {title: 'Race', type: 'text'},
@@ -108,7 +131,8 @@
                     }
                 },
                 actions: {
-                    show: {title: '', description: 'Learn more', icon: 'fa-solid fa-eye'}
+                    show: {title: '', description: 'Learn more', icon: 'fa-solid fa-eye'},
+                    // edit: {title: '', description: 'Edit info', icon: 'fa-solid fa-pencil'},
                 },
                 pagination: {
                     1: {

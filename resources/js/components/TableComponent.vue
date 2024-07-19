@@ -23,7 +23,7 @@
                         </template>
                     </span>
                     <span v-else-if="columnKey === 'actions'">
-                        <td>
+                        <td class="d-flex gap-3 justify-content-start">
                             <template v-for="action, aKey in actions" :key="aKey">
                                 <a :href="aKey" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="left" :data-bs-title="action.description">
                                     <i :class="action.icon"></i>
