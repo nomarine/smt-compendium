@@ -12,8 +12,8 @@
                 
                 <template v-for="field, fieldKey in formSelectList" :key="fieldKey">
                     <div class="form-field">
-                        <label :for="'demon_'+fieldKey" class="form-label">{{fieldKey}}</label>
-                        <select :name="'demon_'+fieldKey" class="form-select" aria-label="Race select field">
+                        <label :for="'demon_'+fieldKey" class="form-label">{{formatFormLabel(fieldKey)}}</label>
+                        <select :name="'demon_'+fieldKey" class="form-select" :aria-label="fieldKey+' select field'">
                             <option selected></option>
                             <option v-for="option, optionKey in field" :value="option.id" :key="optionKey">{{option.title}}</option>
                         </select>
@@ -119,6 +119,13 @@
                         active: false
                     },
                 }
+            }
+        },
+        methods: {
+            formatFormLabel(string) {
+                string = string.replace(/_/g, " ")
+                string = string.charAt(0).toUpperCase() + string.slice(1)
+                return string
             }
         }
     }
