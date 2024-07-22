@@ -7,19 +7,22 @@
             <div class="search-fields">
                 <div class="form-field">
                     <label for="demon_name" class="form-label">Name</label>
-                    <input name="demon_name" type="text" class="form-control">
+                    <input name="demon_name" type="text" class="form-control" v-model="formData.name">
                 </div>
                 
                 <template v-for="field, fieldKey in formSelectList" :key="fieldKey">
                     <div class="form-field">
                         <label :for="'demon_'+fieldKey" class="form-label">{{formatFormLabel(fieldKey)}}</label>
-                        <select :name="'demon_'+fieldKey" class="form-select" :aria-label="fieldKey+' select field'">
+                        <select :name="'demon_'+fieldKey" class="form-select" :aria-label="fieldKey+' select field'" data-actions-box="true" v-model="formData[fieldKey]">
                             <option selected></option>
                             <option v-for="option, optionKey in field" :value="option.id" :key="optionKey">{{option.title}}</option>
                         </select>
                     </div>
                 </template>
             </div>
+        </template>
+        <template v-slot:actions>
+            <button type="button" class="btn btn-secondary" @click="clearForm"><i class="fa-solid fa-eraser"></i>Clear</button>
         </template>
     </FormComponent>
 
@@ -43,6 +46,13 @@
         },
         data() {
             return {
+                formData: {
+                    name: '',
+                    race: '',
+                    arcana: '',
+                    origin: '',
+                    appears_in: '',
+                },
                 formSelectList: {
                     race: {
                         night: {id:'10', title:'Night'},
@@ -83,8 +93,7 @@
                     actions: {title: 'Actions', type: 'text'},
                 },
                 personaData: {
-                    seimen_kongou: 
-                        { 
+                    seimen_kongou: { 
                             name: 'Seimen Kongou', 
                             race: 'N/A', 
                             arcana: 'Emperor', 
@@ -97,6 +106,22 @@
                                 pasa: {
                                     abbreviation: 'P-ASA',
                                     description: 'Persona All-Stars Arena'
+                                },
+                            }
+                    },
+                    himeros: { 
+                            name: 'Himeros', 
+                            race: 'Zealot', 
+                            arcana: 'Lovers', 
+                            origin: ['Greek'], 
+                            appearances: {
+                                smt6: {
+                                    abbreviation: 'SMT6',
+                                    description: 'Shin Megami Tensei VI'
+                                },
+                                p6: {
+                                    abbreviation: 'P6',
+                                    description: 'Persona 6'
                                 },
                             }
                     }
@@ -126,6 +151,15 @@
                 string = string.replace(/_/g, " ")
                 string = string.charAt(0).toUpperCase() + string.slice(1)
                 return string
+            },
+            clearForm() {
+                this.formData = {
+                    name: '',
+                    race: '',
+                    arcana: '',
+                    origin: '',
+                    appears_in: '',
+                }
             }
         }
     }
