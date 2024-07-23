@@ -2,11 +2,13 @@
     <table class="table" data-toggle="table">
         <thead>
             <tr>
-            <th data-sortable="true" scope="col" v-for="column, key in tableColumns" :key="key" :data-field="key">{{column.title}}<i class="fa-solid fa-sort"></i></th>
+            <th data-sortable="true" scope="col" v-for="column, key in tableColumns" :key="key" :data-field="key">{{column.title}}
+                <a @click="sortColumnDefault(key)"><i class="fa-solid fa-sort"></i></a>
+            </th>
             </tr>
         </thead>
         <tbody>
-            <tr v-for="data, dKey in payload" :key="dKey" class="table-row">
+            <tr v-for="data, dKey in localPayload" :key="dKey" class="table-row">
                 <td v-for="column, columnKey in tableColumns" :key="columnKey" scope="row" class="align-middle">
                     <span v-if="column.type === 'list'">
                         <template v-for="item, key in data[columnKey]" :key="key">
@@ -53,5 +55,29 @@
             'payload',
             'actions'
         ],
+        data() { 
+            return {
+                localPayload: { ...this.payload}
+            }
+        },
+        methods: {
+            sortColumnDefault(column){
+                const entries = Object.entries(this.localPayload);
+                console.log(column)
+                // Sort the array by the `name` property
+                entries.sort((a, b) => {
+                    const nameA = a[1][column].toUpperCase(); // Ignore case
+                    const nameB = b[1][column].toUpperCase(); // Ignore case
+                    if (nameA < nameB) return -1;
+                    if (nameA > nameB) return 1;
+                    return 0;
+                });
+
+                // Convert the sorted array back to an object
+                this.localPayload = Object.fromEntries(entries);
+
+                console.log(this.localPayload);
+            }
+        }
     }
 </script>
