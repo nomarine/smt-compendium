@@ -30,7 +30,7 @@
                     </span>
                     <span v-else-if="columnKey === 'actions'">
                         <template v-for="action, aKey in actions" :key="aKey">
-                            <a v-if="aKey === 'show'" @click="handleAction(data)" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="left" :data-bs-title="action.description">
+                            <a v-if="aKey === 'show'" href="#" @click="handleAction(data)" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="left" :data-bs-title="action.description">
                                 <i :class="action.icon"></i>
                             </a>
                             <a v-else :href="aKey" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="left" :data-bs-title="action.description">

@@ -106,7 +106,7 @@
                                     description: 'Megami Ibunroku Persona'
                                 },
                                 pasa: {
-                                    abbreviation: 'P-ASA',
+                                    abbreviation: 'PASA',
                                     description: 'Persona All-Stars Arena'
                                 },
                             }
@@ -180,9 +180,8 @@
                 }
             },
             showDemon(demon) {
-                console.log(demon)
-                // this.$store.commit('setSelectedItem', demon);
-                // this.$router.push({ name: 'show' });
+                this.$store.commit('setSelectedItem', demon);
+                window.location.href = `demon/show`;
             }
         }
     }

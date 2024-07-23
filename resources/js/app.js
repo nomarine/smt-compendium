@@ -7,10 +7,12 @@
 import '../sass/app.scss';
 import '../css/app.css';
 import './bootstrap';
+import 'bootstrap';
 
 import { createApp } from 'vue';
 
 import { createStore } from 'vuex'
+import createPersistedState from 'vuex-persistedstate';
 
 const store = createStore({
     state: {
@@ -20,7 +22,8 @@ const store = createStore({
         setSelectedItem(state, item) {
             state.selectedItem = item
         }
-    }    
+    },
+    plugins: [createPersistedState()],
 })
 
 /**

@@ -1,23 +1,29 @@
 <template>
-    <h3 class="demon-title">Seimen Kongou</h3>
+    <h3 class="demon-title">{{selectedDemon.name}}</h3>
     <hr>
     <div class=row>
         <div class="col-md-4">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
+            <li v-for="(game, gameKey,index) in selectedDemon.appearances" :key="gameKey" class="nav-item" role="presentation">
+                <button class="nav-link" :class="{active: index === 0}" :id="game.abbreviation+'-tab'" data-bs-toggle="tab" :data-bs-target="'#'+game.abbreviation" type="button" role="tab" :aria-controls="game.abbreviation" :aria-selected="index === 0">{{game.abbreviation}}</button>
+            </li>
+            <!-- <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#P1" type="button" role="tab" aria-controls="P1" aria-selected="true">P1</button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#P5X" type="button" role="tab" aria-controls="P5X" aria-selected="false">P5X</button>
-            </li>
+            </li> -->
         </ul>
             <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="P1" role="tabpanel" aria-labelledby="home-tab">
-                <img class="demon-portrait" src="/img/seimen_kongou.png" alt="Seimen Kongou portrait">
-            </div>
-            <div class="tab-pane fade" id="P5X" role="tabpanel" aria-labelledby="profile-tab">
-                <img class="demon-portrait" src="" alt="Seimen Kongou portrait">
-            </div>
+                <div v-for="(game, gameKey, index) in selectedDemon.appearances" :key="gameKey" class="tab-pane fade" :class="{'show active': index === 0}" :id="game.abbreviation" role="tabpanel" :aria-labelledby="game.abbreviation+'-tab'">
+                    <img class="demon-portrait" :src="'/img/seimen_kongou_'+gameKey+'.png'" alt="Seimen Kongou portrait">
+                </div>
+                <!-- <div class="tab-pane fade show active" id="P1" role="tabpanel" aria-labelledby="home-tab">
+                    <img class="demon-portrait" src="/img/seimen_kongou.png" alt="Seimen Kongou portrait">
+                </div>
+                <div class="tab-pane fade" id="P5X" role="tabpanel" aria-labelledby="profile-tab">
+                    <img class="demon-portrait" src="" alt="Seimen Kongou portrait">
+                </div> -->
             </div>
         </div>
 
@@ -51,6 +57,11 @@
         },
         components:  {
             AppearancesTable
+        },
+        computed: {
+            selectedDemon() {
+                return this.$store.state.selectedItem
+            }
         }
     }
 </script>
