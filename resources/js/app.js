@@ -10,6 +10,19 @@ import './bootstrap';
 
 import { createApp } from 'vue';
 
+import { createStore } from 'vuex'
+
+const store = createStore({
+    state: {
+        selectedItem: null
+    },
+    mutations: {
+        setSelectedItem(state, item) {
+            state.selectedItem = item
+        }
+    }    
+})
+
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
  * registering components with the application instance so they are ready
@@ -17,6 +30,7 @@ import { createApp } from 'vue';
  */
 
 const app = createApp({});
+app.use(store)
 
 import ExampleComponent from './components/ExampleComponent.vue';
 app.component('example-component', ExampleComponent);

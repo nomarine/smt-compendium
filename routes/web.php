@@ -22,10 +22,13 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 
-Route::get('demon/index', function () {
-    return view('app/demon/index');
-})->name('demon/index');;
+Route::prefix('demon')->group(function () {
+    Route::get('index', function () {
+        return view('app/demon/index');
+    })->name('index');
+    Route::get('show', function () {
+        return view('app/demon/show');
+    })->name('show');
+});
 
-Route::get('demon/show', function () {
-    return view('app/demon/show');
-})->name('demon/show');
+

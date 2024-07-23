@@ -21,7 +21,7 @@
                 </template>
             </div>
         </template>
-        <template v-slot:actions>
+        <template v-slot:formActions>
             <button type="button" class="btn btn-secondary" @click="clearForm"><i class="fa-solid fa-eraser"></i>Clear</button>
         </template>
     </FormComponent>
@@ -29,7 +29,8 @@
     <TableComponent
         :tableColumns="tableColumns"
         :payload="personaData"
-        :actions="actions">
+        :actions="actions"
+        @action-triggered="showDemon">
     </TableComponent>
     
     <Pagination-component>
@@ -145,7 +146,7 @@
                 },
                 actions: {
                     show: {title: '', description: 'Learn more', icon: 'fa-solid fa-eye'},
-                    edit: {title: '', description: 'Edit info', icon: 'fa-solid fa-pencil'},
+                    // edit: {title: '', description: 'Edit info', icon: 'fa-solid fa-pencil'},
                 },
                 pagination: {
                     1: {
@@ -177,6 +178,11 @@
                     origin: '',
                     appears_in: '',
                 }
+            },
+            showDemon(demon) {
+                console.log(demon)
+                // this.$store.commit('setSelectedItem', demon);
+                // this.$router.push({ name: 'show' });
             }
         }
     }
