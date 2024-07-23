@@ -1,12 +1,12 @@
 <template>
-    <table class="table">
+    <table class="table" data-toggle="table">
         <thead>
             <tr>
-            <th scope="col" v-for="column, key in tableColumns" :key="key">{{column.title}}<i class="fa-solid fa-sort"></i></th>
+            <th data-sortable="true" scope="col" v-for="column, key in tableColumns" :key="key" :data-field="key">{{column.title}}<i class="fa-solid fa-sort"></i></th>
             </tr>
         </thead>
         <tbody>
-            <tr v-for="data, dKey in payload" :key="dKey" class="row-persona-table">
+            <tr v-for="data, dKey in payload" :key="dKey" class="table-row">
                 <td v-for="column, columnKey in tableColumns" :key="columnKey" scope="row" class="align-middle">
                     <span v-if="column.type === 'list'">
                         <template v-for="item, key in data[columnKey]" :key="key">
@@ -23,13 +23,11 @@
                         </template>
                     </span>
                     <span v-else-if="columnKey === 'actions'">
-                        <td class="d-flex gap-3 justify-content-start">
-                            <template v-for="action, aKey in actions" :key="aKey">
-                                <a :href="aKey" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="left" :data-bs-title="action.description">
-                                    <i :class="action.icon"></i>
-                                </a>
-                            </template>
-                        </td>
+                        <template v-for="action, aKey in actions" :key="aKey">
+                            <a :href="aKey" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="left" :data-bs-title="action.description">
+                                <i :class="action.icon"></i>
+                            </a>
+                        </template>
                     </span>
                     <span v-else>
                         {{data[columnKey]}}

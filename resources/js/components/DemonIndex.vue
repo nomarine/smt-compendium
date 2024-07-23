@@ -37,6 +37,7 @@
         <a class="page-link" href="#" v-html="page.label"></a>
     </li>
     </Pagination-component>
+
 </template>
 
 <script>
@@ -128,7 +129,7 @@
                 },
                 actions: {
                     show: {title: '', description: 'Learn more', icon: 'fa-solid fa-eye'},
-                    // edit: {title: '', description: 'Edit info', icon: 'fa-solid fa-pencil'},
+                    edit: {title: '', description: 'Edit info', icon: 'fa-solid fa-pencil'},
                 },
                 pagination: {
                     1: {
