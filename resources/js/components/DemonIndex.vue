@@ -86,12 +86,12 @@
 
                 },
                 tableColumns: {
-                    name: {title: 'Name', type: 'text'},
-                    race: {title: 'Race', type: 'text'},
-                    arcana: {title: 'Arcana', type: 'text'},
-                    origin: {title: 'Origin', type: 'list'},
-                    appearances: {title: 'Appearances', type: 'dict'},
-                    actions: {title: 'Actions', type: 'text'},
+                    name: {title: 'Name', type: 'text', sort: true},
+                    race: {title: 'Race', type: 'text', sort: false},
+                    arcana: {title: 'Arcana', type: 'text', sort: false},
+                    origin: {title: 'Origin', type: 'list', sort: false},
+                    appearances: {title: 'Appearances', type: 'dict', sort: false},
+                    actions: {title: 'Actions', type: 'text', sort: false},
                 },
                 personaData: {
                     seimen_kongou: { 
@@ -114,7 +114,7 @@
                             name: 'Himeros', 
                             race: 'Zealot', 
                             arcana: 'Lovers', 
-                            origin: ['Greek'], 
+                            origin: ['Greco-Roman'], 
                             appearances: {
                                 smt6: {
                                     abbreviation: 'SMT6',
@@ -123,6 +123,22 @@
                                 p6: {
                                     abbreviation: 'P6',
                                     description: 'Persona 6'
+                                },
+                            }
+                    },
+                    janus: { 
+                            name: 'Janus', 
+                            race: 'Yoma', 
+                            arcana: 'Star', 
+                            origin: ['Greco-Roman'], 
+                            appearances: {
+                                smt2: {
+                                    abbreviation: 'SMT2',
+                                    description: 'Shin Megami Tensei II'
+                                },
+                                p1: {
+                                    abbreviation: 'P1',
+                                    description: 'Megami Ibunroku Persona'
                                 },
                             }
                     }
