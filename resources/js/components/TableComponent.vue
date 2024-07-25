@@ -14,33 +14,60 @@
         <tbody>
             <tr v-for="data, dKey in localPayload" :key="dKey" class="table-row">
                 <td v-for="column, columnKey in tableColumns" :key="columnKey" scope="row" class="align-middle">
-                    <span v-if="column.type === 'list'">
-                        <template v-for="item, key in data[columnKey]" :key="key">
-                            <span>{{item}}</span>
-                        <span v-if="key != data[columnKey].length - 1">, </span>
+                    {{ initFieldList() }}
+                    <template v-if="column.game_distinct">
+                        <template v-for="game, gameKey in data.appearances" :key="gameKey">
+                            <span v-if="column.type === 'list'">
+                                <template v-for="item, key in game[columnKey]" :key="key">
+                                    <span>{{item}}</span>
+                                <span v-if="key != game[columnKey].length - 1">, </span>
+                                </template>
+                            </span>
+                            <span v-else-if="column.type === 'dict'">
+                                <template v-for="item, iKey, index in game[columnKey]" :key="iKey">
+                                <a data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="left" :data-bs-title="item.description">
+                                    <span>{{item.abbreviation}}</span>
+                                </a>
+                                <span v-if="index != Object.keys(game[columnKey]).length - 1">, </span>
+                                </template>
+                            </span>
+                            <span v-else>
+                                <template v-if="distinctFieldList(game[columnKey])">
+                                    {{game[columnKey]}}
+                                </template>
+                            </span>
                         </template>
-                    </span>
-                    <span v-else-if="column.type === 'dict'">
-                        <template v-for="item, iKey, index in data[columnKey]" :key="iKey">
-                        <a data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="left" :data-bs-title="item.description">
-                            <span>{{item.abbreviation}}</span>
-                        </a>
-                        <span v-if="index != Object.keys(data[columnKey]).length - 1">, </span>
-                        </template>
-                    </span>
-                    <span v-else-if="columnKey === 'actions'">
-                        <template v-for="action, aKey in actions" :key="aKey">
-                            <a v-if="aKey === 'show'" href="#" @click="handleAction(data)" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="left" :data-bs-title="action.description">
-                                <i :class="action.icon"></i>
+                    </template>
+                    
+                    <template v-else>
+                        <span v-if="column.type === 'list'">
+                            <template v-for="item, key in data[columnKey]" :key="key">
+                                <span>{{item}}</span>
+                            <span v-if="key != data[columnKey].length - 1">, </span>
+                            </template>
+                        </span>
+                        <span v-else-if="column.type === 'dict'">
+                            <template v-for="item, iKey, index in data[columnKey]" :key="iKey">
+                            <a data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="left" :data-bs-title="item.title.description">
+                                <span>{{item.title.abbreviation}}</span>
                             </a>
-                            <a v-else :href="aKey" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="left" :data-bs-title="action.description">
-                                <i :class="action.icon"></i>
-                            </a>
-                        </template>
-                    </span>
-                    <span v-else>
-                        {{data[columnKey]}}
-                    </span>
+                            <span v-if="index != Object.keys(data[columnKey]).length - 1">, </span>
+                            </template>
+                        </span>
+                        <span v-else-if="columnKey === 'actions'">
+                            <template v-for="action, aKey in actions" :key="aKey">
+                                <a v-if="aKey === 'show'" href="#" @click="handleAction(data)" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="left" :data-bs-title="action.description">
+                                    <i :class="action.icon"></i>
+                                </a>
+                                <a v-else :href="aKey" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="left" :data-bs-title="action.description">
+                                    <i :class="action.icon"></i>
+                                </a>
+                            </template>
+                        </span>
+                        <span v-else>
+                            {{data[columnKey]}}
+                        </span>
+                    </template>
                 </td>
             </tr>
         </tbody>
@@ -62,6 +89,11 @@
             'payload',
             'actions'
         ],
+        computed: {
+            fieldList() {
+                return this.fieldList = []
+            }
+        },
         data() { 
             return {
                 localPayload: { ...this.payload},
@@ -107,6 +139,19 @@
             },
             handleAction(data) {
                 this.$emit('action-triggered', data)
+            },
+            initFieldList(){
+                this.fieldList = []
+            },
+            distinctFieldList(item){
+                if(this.fieldList.includes(item)){
+                    console.log(false)
+                    return false
+                } else {
+                    this.fieldList.push(item)
+                    console.log(true, item)
+                    return true
+                }
             }
         }
     }

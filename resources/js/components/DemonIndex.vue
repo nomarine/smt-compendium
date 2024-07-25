@@ -87,59 +87,78 @@
 
                 },
                 tableColumns: {
-                    name: {title: 'Name', type: 'text', sort: true},
-                    race: {title: 'Race', type: 'text', sort: false},
-                    arcana: {title: 'Arcana', type: 'text', sort: false},
-                    origin: {title: 'Origin', type: 'list', sort: false},
+                    name: {title: 'Name', type: 'text', sort: true, game_distinct: false},
+                    race: {title: 'Race', type: 'text', sort: false, game_distinct: true},
+                    arcana: {title: 'Arcana', type: 'text', sort: false, game_distinct: true},
+                    origin: {title: 'Origin', type: 'list', sort: false, game_distinct: false},
                     appearances: {title: 'Appearances', type: 'dict', sort: false},
                     actions: {title: 'Actions', type: 'text', sort: false},
                 },
                 personaData: {
-                    seimen_kongou: { 
+                    seimen_kongou: {
                             name: 'Seimen Kongou', 
-                            race: 'N/A', 
-                            arcana: 'Emperor', 
                             origin: ['Hinduism', 'Budhism'], 
                             appearances: {
-                                p1: {
-                                    abbreviation: 'P1',
-                                    description: 'Megami Ibunroku Persona'
+                                p1: {        
+                                    title: { abbreviation: 'P1',
+                                             description: 'Megami Ibunroku Persona',
+                                    },
+                                    base_level: '1',
+                                    race: 'N/A', 
+                                    arcana: 'Emperor', 
                                 },
                                 pasa: {
-                                    abbreviation: 'PASA',
-                                    description: 'Persona All-Stars Arena'
+                                    name: 'Seimen Kongou',
+                                    title: { abbreviation: 'PASA',
+                                             description: 'Persona All-Stars Arena',
+                                    },
+                                    base_level: '26',
+                                    race: 'N/A', 
+                                    arcana: 'Emperor', 
                                 },
                             }
                     },
                     himeros: { 
                             name: 'Himeros', 
-                            race: 'Zealot', 
-                            arcana: 'Lovers', 
                             origin: ['Greco-Roman'], 
                             appearances: {
                                 smt6: {
-                                    abbreviation: 'SMT6',
-                                    description: 'Shin Megami Tensei VI'
+                                    title: {
+                                        abbreviation: 'SMT6',
+                                        description: 'Shin Megami Tensei VI',
+                                    },
+                                    base_level: '77',
+                                    race: 'Zealot', 
                                 },
                                 p6: {
-                                    abbreviation: 'P6',
-                                    description: 'Persona 6'
+                                    title: {
+                                        abbreviation: 'P6',
+                                        description: 'Persona 6',
+                                    },
+                                    base_level: '80',
+                                    arcana: 'Lovers', 
                                 },
                             }
                     },
                     janus: { 
                             name: 'Janus', 
-                            race: 'Yoma', 
-                            arcana: 'Star', 
                             origin: ['Greco-Roman'], 
                             appearances: {
                                 smt2: {
-                                    abbreviation: 'SMT2',
-                                    description: 'Shin Megami Tensei II'
+                                    title: {
+                                        abbreviation: 'SMT2',
+                                        description: 'Shin Megami Tensei II',
+                                    },
+                                    base_level: '24',
+                                    race: 'Yoma', 
                                 },
                                 p1: {
-                                    abbreviation: 'P1',
-                                    description: 'Megami Ibunroku Persona'
+                                    title: {
+                                        abbreviation: 'P1',
+                                        description: 'Megami Ibunroku Persona',
+                                    },
+                                    base_level: '30',
+                                    arcana: 'Star', 
                                 },
                             }
                     }
