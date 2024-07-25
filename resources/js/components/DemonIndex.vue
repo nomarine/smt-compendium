@@ -44,7 +44,7 @@
 <script>
     export default {
         mounted() {
-            console.log('Component mounted.')
+
         },
         data() {
             return {
@@ -104,17 +104,17 @@
                                              description: 'Megami Ibunroku Persona',
                                     },
                                     base_level: '1',
-                                    race: 'N/A', 
                                     arcana: 'Emperor', 
+                                    portrait: 'seimen_kongou_p1.png'
                                 },
                                 pasa: {
                                     name: 'Seimen Kongou',
                                     title: { abbreviation: 'PASA',
                                              description: 'Persona All-Stars Arena',
                                     },
-                                    base_level: '26',
-                                    race: 'N/A', 
+                                    base_level: '16',
                                     arcana: 'Emperor', 
+                                    portrait: 'seimen_kongou_pasa.png'
                                 },
                             }
                     },
@@ -129,6 +129,7 @@
                                     },
                                     base_level: '77',
                                     race: 'Zealot', 
+                                    portrait: 'himeros_smt6.jpg'
                                 },
                                 p6: {
                                     title: {

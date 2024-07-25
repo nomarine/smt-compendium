@@ -2,17 +2,21 @@
     <h3 class="demon-title">{{selectedDemon.name}}</h3>
     <hr>
     <div class=row>
+
         <div class="col-md-4">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li v-for="(game, gameKey,index) in selectedDemon.appearances" :key="gameKey" class="nav-item" role="presentation">
-                <button class="nav-link" :class="{active: index === 0}" :id="game.title.abbreviation+'-tab'" data-bs-toggle="tab" :data-bs-target="'#'+game.title.abbreviation" type="button" role="tab" :aria-controls="game.title.abbreviation" :aria-selected="index === 0">{{game.title.abbreviation}}</button>
-            </li>
-        </ul>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <span v-for="(game, gameKey,index) in selectedDemon.appearances" :key="gameKey">
+                    <li v-if="game.portrait" class="nav-item" role="presentation">
+                        <button class="nav-link" :class="{active: index === 0}" :id="game.title.abbreviation+'-tab'" data-bs-toggle="tab" :data-bs-target="'#'+game.title.abbreviation" type="button" role="tab" :aria-controls="game.title.abbreviation" :aria-selected="index === 0">{{game.title.abbreviation}}</button>
+                    </li>
+                </span>
+            </ul>
             <div class="tab-content" id="myTabContent">
                 <div v-for="(game, gameKey, index) in selectedDemon.appearances" :key="gameKey" class="tab-pane fade" :class="{'show active': index === 0}" :id="game.title.abbreviation" role="tabpanel" :aria-labelledby="game.title.abbreviation+'-tab'">
-                    <img class="demon-portrait" :src="'/img/seimen_kongou_'+gameKey+'.png'" alt="Seimen Kongou portrait">
+                    <img class="demon-portrait" :src="'/img/'+game.portrait" alt="Seimen Kongou portrait">
                 </div>
             </div>
+            
         </div>
 
         <div class="col-md-8">
@@ -33,40 +37,52 @@
                 <!-- <AppearancesTable/> -->
                 <TableComponent
                     :tableColumns="tableColumns"
-                    :payload="selectedDemon.appearances">
+                    :payload="demonInfo">
                 </TableComponent>
+                {{ console.log(demonInfo) }}
             </div>
         </div>
     </div>
     <br>
     <div>
-        <a type="button" href="index" class="btn btn-secondary"><i class="fa-solid fa-magnifying-glass"></i>Back to Search</a>
+        <a type="button" href="/" class="btn btn-secondary"><i class="fa-solid fa-magnifying-glass"></i>Back to Search</a>
     </div>
 </template>
 
 <script>
-    import AppearancesTable from './AppearancesTable.vue';
     export default {
         mounted() {
             console.log('Component mounted.')
         },
         components:  {
-            AppearancesTable
+            
         },
         computed: {
             selectedDemon() {
                 return this.$store.state.selectedItem
+            },
+            demonInfo() {
+                for(const key in this.selectedDemon.appearances){
+                    this.payload[key] = {
+                        title: this.selectedDemon.appearances[key].title.description,
+                        race_arcana: this.selectedDemon.appearances[key].race ? this.selectedDemon.appearances[key].race : this.selectedDemon.appearances[key].arcana,
+                        base_level: this.selectedDemon.appearances[key].base_level
+                    }
+                }
+                return this.payload
             }
         },
         data() { 
             return {
                 tableColumns: {
-                    games: {title: 'Games', type: 'text', sort: true},    
-                    race_arcana: {title: 'Race/Arcana', type: 'dict', sort: false},
-                    base_level: {title: 'Base Level', type: 'text', sort: false},
+                    title: {title: 'Games', type: 'text', sort: true},    
+                    race_arcana: {title: 'Race/Arcana', type: 'text', sort: false},
+                    base_level: {title: 'Base Level', type: 'text', sort: true},
                 },
                 payload: {
-                    selectedDemon: this.selectedDemon
+                    // title: '',
+                    // race_arcana: '',
+                    // base_level: ''
                 }
             }
         }
