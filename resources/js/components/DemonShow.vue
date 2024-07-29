@@ -34,7 +34,6 @@
             </div>
             <div>
                 <h5>Appearances</h5>
-                <!-- <AppearancesTable/> -->
                 <TableComponent
                     :tableColumns="tableColumns"
                     :payload="demonInfo">

@@ -1,0 +1,6 @@
+projectKey=smt-compendium
+serverUrl=http://localhost:9000
+serverVersion=10.6.0.92116
+dashboardUrl=http://localhost:9000/dashboard?id=smt-compendium
+ceTaskId=75fc7c3b-cdf5-49ff-8424-0374d4e4c08b
+ceTaskUrl=http://localhost:9000/api/ce/task?id=75fc7c3b-cdf5-49ff-8424-0374d4e4c08b

@@ -34,9 +34,7 @@
     </TableComponent>
     
     <Pagination-component>
-    <li v-for="page, key in pagination" :key="key" :class="page.active ? 'page-item active' : 'page-item'">
-        <a class="page-link" href="#" v-html="page.label"></a>
-    </li>
+
     </Pagination-component>
 
 </template>

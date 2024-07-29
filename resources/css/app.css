@@ -1,6 +1,6 @@
 /*Body*/
 .logo-default {
-    font-family: "Revalia";
+    font-family: "Revalia", fantasy;
     font-size: 24px;
     color: white;
     text-decoration: none;
@@ -104,7 +104,7 @@ a[data-bs-toggle="tooltip"] {
 
 /* Demon show */
 .demon-title {
-    font-family: "Revalia";
+    font-family: "Revalia", fantasy;
     color: var(--bs-white);
 }
 

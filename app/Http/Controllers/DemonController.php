@@ -37,7 +37,7 @@ class DemonController extends Controller
             'lore' => $request->lore,
         ]);
 
-        return $response()->json($demon, 201);
+        return response()->json($demon, 201);
     }
 
     /**

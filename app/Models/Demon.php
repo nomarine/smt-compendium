@@ -21,7 +21,7 @@ class Demon extends Model
         ];
     }
 
-    public function feedback() { 
+    public function feedback() {
         return [
             'required' => ':attribute is required.',
         ];
