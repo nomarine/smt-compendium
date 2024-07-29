@@ -1,8 +1,8 @@
 <script setup>
-    import { ref, onMounted } from 'vue'
+    import { ref } from 'vue'
+    import { useStore } from 'vuex'
 
-    // reactive state
-    const count = ref(0)
+    const store = useStore()
 
     const formData = ref({
         name: '',
@@ -161,10 +161,10 @@
         }
     }
     const showDemon = (demon) => {
-        this.$store.commit('setSelectedItem', demon);
+        store.commit('setSelectedItem', demon);
         window.location.href = `demon/show`;
     }
-    
+
 </script>
 
 <template>
@@ -207,18 +207,3 @@
     </Pagination-component>
 
 </template>
-
-<script>
-    export default {
-        mounted() {
-
-        },
-        data() {
-            
-                
-        },
-        methods: {
-            
-        }
-    }
-</script>

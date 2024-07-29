@@ -1,3 +1,89 @@
+<script setup>
+    import { ref, onMounted } from 'vue'
+    import { Tooltip } from 'bootstrap'
+    
+    onMounted(() => {
+        new Tooltip(document.body, {
+            selector: "[data-bs-toggle='tooltip']",
+        })
+    })
+
+    const props = defineProps([
+        'tableColumns',
+        'payload',
+        'actions'
+    ])
+
+    const emit = defineEmits([
+        'action-triggered'
+    ])
+
+    const handleAction = (data) => {
+        emit('action-triggered', data)
+    }
+
+    function fieldList() {
+        return fieldList.value = []
+    }
+    
+    const initFieldList = () => {
+        fieldList.value = []
+    }
+
+    const distinctFieldList = (item) => {
+        if(fieldList.value.includes(item)){
+            console.log(false)
+            return false
+        } else {
+            fieldList.value.push(item)
+            console.log(true, item)
+            return true
+        }
+    }
+
+    const localPayload = ref({ ...props.payload})
+    const localTableColumns = ref({ ...props.tableColumns})
+        
+    const sortColumnAsc = (column) => {
+        const entries = Object.entries(localPayload.value);
+            
+        // Sort the array by the `name` property
+        entries.sort((a, b) => {
+            const nameA = a[1][column].toUpperCase(); // Ignore case
+            const nameB = b[1][column].toUpperCase(); // Ignore case
+            if (nameA < nameB) return -1;
+            if (nameA > nameB) return 1;
+            return 0;
+        });
+
+        // Convert the sorted array back to an object
+        localPayload.value = Object.fromEntries(entries);
+        localTableColumns.value[column].sort = 'asc'
+    }
+
+    const sortColumnDesc = (column) => {
+        const entries = Object.entries(localPayload.value);
+
+        // Sort the array by the `name` property
+        entries.sort((a, b) => {
+            const nameA = a[1][column].toUpperCase(); // Ignore case
+            const nameB = b[1][column].toUpperCase(); // Ignore case
+            if (nameA < nameB) return 1;
+            if (nameA > nameB) return -1;
+            return 0;
+        });
+
+        // Convert the sorted array back to an object
+        localPayload.value = Object.fromEntries(entries);
+        localTableColumns.value[column].sort = 'desc'
+    }
+
+    const sortColumnDefault = (column) => {
+        localPayload.value = { ...props.payload}
+        localTableColumns.value[column].sort = true
+    }
+</script>
+
 <template>
     <table class="table" data-toggle="table">
         <thead>
@@ -73,86 +159,3 @@
         </tbody>
     </table>
 </template>
-
-<script>
-    import { Tooltip } from 'bootstrap'
-
-    export default {
-        name: 'TableComponent',
-        mounted() {
-            new Tooltip(document.body, {
-                selector: "[data-bs-toggle='tooltip']",
-            })
-        },
-        props: [
-            'tableColumns',
-            'payload',
-            'actions'
-        ],
-        computed: {
-            fieldList() {
-                return this.fieldList = []
-            }
-        },
-        data() { 
-            return {
-                localPayload: { ...this.payload},
-                localTableColumns: { ...this.tableColumns},
-            }
-        },
-        methods: {
-            sortColumnAsc(column){
-                const entries = Object.entries(this.localPayload);
-                
-                // Sort the array by the `name` property
-                entries.sort((a, b) => {
-                    const nameA = a[1][column].toUpperCase(); // Ignore case
-                    const nameB = b[1][column].toUpperCase(); // Ignore case
-                    if (nameA < nameB) return -1;
-                    if (nameA > nameB) return 1;
-                    return 0;
-                });
-
-                // Convert the sorted array back to an object
-                this.localPayload = Object.fromEntries(entries);
-                this.localTableColumns[column].sort = 'asc'
-            },
-            sortColumnDesc(column){
-                const entries = Object.entries(this.localPayload);
-
-                // Sort the array by the `name` property
-                entries.sort((a, b) => {
-                    const nameA = a[1][column].toUpperCase(); // Ignore case
-                    const nameB = b[1][column].toUpperCase(); // Ignore case
-                    if (nameA < nameB) return 1;
-                    if (nameA > nameB) return -1;
-                    return 0;
-                });
-
-                // Convert the sorted array back to an object
-                this.localPayload = Object.fromEntries(entries);
-                this.localTableColumns[column].sort = 'desc'
-            },
-            sortColumnDefault(column){
-                this.localPayload = { ...this.payload}
-                this.localTableColumns[column].sort = true
-            },
-            handleAction(data) {
-                this.$emit('action-triggered', data)
-            },
-            initFieldList(){
-                this.fieldList = []
-            },
-            distinctFieldList(item){
-                if(this.fieldList.includes(item)){
-                    console.log(false)
-                    return false
-                } else {
-                    this.fieldList.push(item)
-                    console.log(true, item)
-                    return true
-                }
-            }
-        }
-    }
-</script>

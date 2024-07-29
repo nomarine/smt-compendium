@@ -1,3 +1,32 @@
+<script setup>
+    import { ref, computed } from 'vue'
+    import { useStore } from 'vuex'
+
+    const store = useStore()
+
+    const tableColumns = ref({
+        title: {title: 'Games', type: 'text', sort: true},    
+        race_arcana: {title: 'Race/Arcana', type: 'text', sort: false},
+        base_level: {title: 'Base Level', type: 'text', sort: true},
+    })
+
+    const selectedDemon = computed(() => store.state.selectedItem )
+
+    const demonInfo = computed(() => {
+        const info = {}
+        if(selectedDemon.value && selectedDemon.value.appearances) {
+            for(const key in selectedDemon.value.appearances){
+                info[key] = {
+                    title: selectedDemon.value.appearances[key].title.description,
+                    race_arcana: selectedDemon.value.appearances[key].race ? selectedDemon.value.appearances[key].race : selectedDemon.value.appearances[key].arcana,
+                    base_level: selectedDemon.value.appearances[key].base_level
+                }
+            }
+        }
+        return info
+    })
+</script>
+
 <template>
     <h3 class="demon-title">{{selectedDemon.name}}</h3>
     <hr>
@@ -47,43 +76,3 @@
         <a type="button" href="/" class="btn btn-secondary"><i class="fa-solid fa-magnifying-glass"></i>Back to Search</a>
     </div>
 </template>
-
-<script>
-    export default {
-        mounted() {
-            console.log('Component mounted.')
-        },
-        components:  {
-            
-        },
-        computed: {
-            selectedDemon() {
-                return this.$store.state.selectedItem
-            },
-            demonInfo() {
-                for(const key in this.selectedDemon.appearances){
-                    this.payload[key] = {
-                        title: this.selectedDemon.appearances[key].title.description,
-                        race_arcana: this.selectedDemon.appearances[key].race ? this.selectedDemon.appearances[key].race : this.selectedDemon.appearances[key].arcana,
-                        base_level: this.selectedDemon.appearances[key].base_level
-                    }
-                }
-                return this.payload
-            }
-        },
-        data() { 
-            return {
-                tableColumns: {
-                    title: {title: 'Games', type: 'text', sort: true},    
-                    race_arcana: {title: 'Race/Arcana', type: 'text', sort: false},
-                    base_level: {title: 'Base Level', type: 'text', sort: true},
-                },
-                payload: {
-                    // title: '',
-                    // race_arcana: '',
-                    // base_level: ''
-                }
-            }
-        }
-    }
-</script>
