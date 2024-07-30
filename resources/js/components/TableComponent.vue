@@ -25,7 +25,7 @@
     function fieldList() {
         return fieldList.value = []
     }
-    
+
     const initFieldList = () => {
         fieldList.value = []
     }
@@ -44,43 +44,35 @@
     const localPayload = ref({ ...props.payload})
     const localTableColumns = ref({ ...props.tableColumns})
         
-    const sortColumnAsc = (column) => {
-        const entries = Object.entries(localPayload.value);
-            
-        // Sort the array by the `name` property
-        entries.sort((a, b) => {
-            const nameA = a[1][column].toUpperCase(); // Ignore case
-            const nameB = b[1][column].toUpperCase(); // Ignore case
-            if (nameA < nameB) return -1;
-            if (nameA > nameB) return 1;
-            return 0;
-        });
-
-        // Convert the sorted array back to an object
-        localPayload.value = Object.fromEntries(entries);
-        localTableColumns.value[column].sort = 'asc'
-    }
-
-    const sortColumnDesc = (column) => {
+    const sortColumn = (column, order = null) => {
         const entries = Object.entries(localPayload.value);
 
-        // Sort the array by the `name` property
-        entries.sort((a, b) => {
-            const nameA = a[1][column].toUpperCase(); // Ignore case
-            const nameB = b[1][column].toUpperCase(); // Ignore case
-            if (nameA < nameB) return 1;
-            if (nameA > nameB) return -1;
-            return 0;
-        });
-
-        // Convert the sorted array back to an object
-        localPayload.value = Object.fromEntries(entries);
-        localTableColumns.value[column].sort = 'desc'
-    }
-
-    const sortColumnDefault = (column) => {
-        localPayload.value = { ...props.payload}
-        localTableColumns.value[column].sort = true
+        if(order === 0) {
+            entries.sort((a, b) => {
+                const nameA = a[1][column].toUpperCase(); // Ignore case
+                const nameB = b[1][column].toUpperCase(); // Ignore case
+                if (nameA < nameB) return 1;
+                if (nameA > nameB) return -1;
+                return 0;
+            });
+            // Convert the sorted array back to an object
+            localPayload.value = Object.fromEntries(entries);
+            localTableColumns.value[column].sort = 'desc'
+        } else if(order === 1) {          
+            entries.sort((a, b) => {
+                const nameA = a[1][column].toUpperCase(); // Ignore case
+                const nameB = b[1][column].toUpperCase(); // Ignore case
+                if (nameA < nameB) return -1;
+                if (nameA > nameB) return 1;
+                return 0;
+            });
+            // Convert the sorted array back to an object
+            localPayload.value = Object.fromEntries(entries);
+            localTableColumns.value[column].sort = 'asc'  
+        } else {
+            localPayload.value = { ...props.payload}
+            localTableColumns.value[column].sort = true
+        }
     }
 </script>
 
@@ -90,9 +82,9 @@
             <tr>
             <th data-sortable="true" scope="col" v-for="column, key in tableColumns" :key="key" :data-field="key">{{column.title}}
                 <span v-if="column.sort">
-                    <a v-if="column.sort === 'asc'" @click="sortColumnDesc(key)"><i class="fa-solid fa-sort-up"></i></a>
-                    <a v-else-if="column.sort === 'desc'" @click="sortColumnDefault(key)"><i class="fa-solid fa-sort-down"></i></a>
-                    <a v-else @click="sortColumnAsc(key)"><i class="fa-solid fa-sort"></i></a>
+                    <a v-if="column.sort === 'asc'" @click="sortColumn(key, 0)"><i class="fa-solid fa-sort-up"></i></a>
+                    <a v-else-if="column.sort === 'desc'" @click="sortColumn(key)"><i class="fa-solid fa-sort-down"></i></a>
+                    <a v-else @click="sortColumn(key, 1)"><i class="fa-solid fa-sort"></i></a>
                 </span>
             </th>
             </tr>
