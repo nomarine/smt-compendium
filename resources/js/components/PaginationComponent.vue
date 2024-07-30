@@ -1,5 +1,8 @@
+<script setup>
+    
+</script>
+
 <template>
-    <!-- <nav> -->
     <div class="pagination-controller d-flex justify-content-between align-items-center">
         <div name="display-quantity" class="d-flex gap-2 align-items-center border-end pe-2">
             <p class="mb-0">Display</p>
@@ -28,24 +31,3 @@
         </div>
     </div>
 </template>
-
-<script>
-    
-    export default {
-        mounted() {
-            
-        },
-        props: [
-
-        ],
-        components: {
-            
-        },
-        data () {
-
-        },
-        methods: {
-            
-        }
-    }
-</script>

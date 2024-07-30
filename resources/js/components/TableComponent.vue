@@ -22,6 +22,9 @@
         emit('action-triggered', data)
     }
 
+    const localPayload = ref({ ...props.payload})
+    const localTableColumns = ref({ ...props.tableColumns})
+
     function fieldList() {
         return fieldList.value = []
     }
@@ -40,9 +43,6 @@
             return true
         }
     }
-
-    const localPayload = ref({ ...props.payload})
-    const localTableColumns = ref({ ...props.tableColumns})
         
     const sortColumn = (column, order = null) => {
         const entries = Object.entries(localPayload.value);

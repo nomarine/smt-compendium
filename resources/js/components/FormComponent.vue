@@ -1,3 +1,11 @@
+<script setup>
+    const props = defineProps([
+        'formSelectList',
+        'formActions',
+        'formTitle'
+    ])
+</script>
+
 <template>
     <form class="searchbar row gap-3" id="formDemonSearch">
         <div class="searchbar-title">
@@ -11,16 +19,3 @@
         </div>
     </form>
 </template>
-
-<script>
-    export default {
-        mounted() {
-        
-        },
-        props: [
-            'formSelectList',
-            'formActions',
-            'formTitle'
-        ],
-    }
-</script>
